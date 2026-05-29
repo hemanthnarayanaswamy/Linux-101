@@ -1,0 +1,1 @@
+1. https://www.geeksforgeeks.org/operating-systems/operating-systems-interview-questions/
