@@ -59,6 +59,7 @@ Finally, after the user logs in, the OS loads the desktop environment (such as W
 ---
 # How Linux Kernel Boots
 
+![Linux Architecture](https://applied-programming.github.io/Operating-Systems-Notes/images/linuxarch.png)
 ### 1. BIOS/UEFI and Power-On Self-Test (POST)
 When we press the power button of your system, BIOS (Basic Input/Output System) or UEFI (Unified Extensible Firmware Interface) initiates the boot process.
 
