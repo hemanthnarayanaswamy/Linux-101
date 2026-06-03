@@ -156,8 +156,31 @@ Context Switiching in Linux refers to the process where the CPU stops executing 
 - Every time the kernel performs a context switch — moving execution from one thread to another — the CPU flushes registers, updates the program counter, and reloads process metadata. This is not “free multitasking.” It burns thousands of CPU cycles.
   When the switch rate spikes, cache locality is destroyed and scheduler overhead snowballs, especially in high-load systems.
 
----
+### Zombie Processes 
 
+In Linux, every process goes through a lifecycle: *creation, execution, and termination*. When a parent process spawns a child using `fork()`, the child executes its task and eventually calls `exit()` to terminate. At this point, the child process is no longer running, but the kernel retains its process table entry to store the exit status for the parent to collect. This temporary state is called a **zombie or defunct process**
+
+The parent process is responsible for "reaping" the child by calling `wait() or waitpid()`. This system call retrieves the child's exit status and allows the kernel to remove the process table entry. If the parent fails to perform this step—either due to ignoring the `SIGCHLD` signal or *programming errors—the* child remains in the zombie state 
+
+When a child process terminates in Linux, it enters a "**zombie**" state. In this state, the process has completed its execution, but its entry in the process table remains until the parent process retrieves its exit status. The main reason for this mechanism is to allow the parent process to obtain information about how the child process exited, such as the exit code.
+- It is not an active process and does not consume CPU or memory but it can still occupy an entry in the process table.
+- Zombie processes are identified by the Z state in the process table. They consume minimal system resources, mainly just an entry in the process table. 
+- However, if a large number of zombie processes accumulate, they can exhaust the available process IDs, preventing new processes from being created.
+
+![zombie](https://media.geeksforgeeks.org/wp-content/uploads/20250116110406721449/zmb.webp)
+
+The main reason zombie processes exist is to allow the parent process to obtain information about the child's termination, such as success or error codes. This mechanism supports error handling, resource accounting, and proper system management
+
+Although zombie processes themselves consume very few resources, a large number of them can lead to problems:
+1. **Resource Exhaustion**: As mentioned earlier, they can exhaust the available process IDs, which are a finite resource in the system.
+2. **Monitoring and Debugging**: They can clutter the process list, making it difficult to monitor and debug other processes.
+
+* If the parent process is unresponsive or has a bug, you can kill it. When the parent process dies, the zombie processes are adopted by the init process (PID 1), which automatically cleans them up.
+
+> `Orphan Process`: A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to terminate is called an orphan process.
+> `Orphaned Zombies`: If the parent process exits before reaping the child, the child is adopted by the `init` process (PID 1), which automatically reaps it to prevent indefinite zombie accumulation
+
+---
 ## Process Management
 
 Process management is a core function of an Operating System (OS). It deals with creating, scheduling, and coordinating processes to ensure efficient CPU utilization and smooth system performance.
