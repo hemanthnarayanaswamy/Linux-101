@@ -48,3 +48,17 @@ softlink.txt  -> points to path "original.txt"
 - But if you delete the original file: The symlink **breaks**, because it still points to a path that no longer exists. This is called a `broken symlink`.
 
 ![soft-hard](https://i.pinimg.com/736x/14/7d/0f/147d0f0707c1b407c914ac4036d25d25.jpg)
+
+---
+# Absolute Path vs Relative Path
+
+A path is how you refer to files and directories. It gives the location of a file or directory in the Linux directory structure. It is composed of a name and slash syntax.
+
+```
+/home/hemanthn/scripts
+```
+-  The **Absolute path** always starts from the root directory `(/)`. For example, `/home/hemanthn/scripts/my_scripts.sh`
+-  A **relative path** starts from the current directory. For example, if you are in the `/home` directory and you want to access the `my_scripts.sh` file, you can use `hemanthn/scripts/my_scripts.sh`.
+
+![path1](https://linuxhandbook.com/content/images/2021/04/absolute-vs-relative-path-linux.png)
+---
