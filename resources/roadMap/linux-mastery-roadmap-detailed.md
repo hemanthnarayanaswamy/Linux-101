@@ -1,17 +1,4 @@
 # Linux Mastery Roadmap — DevOps / Platform / SRE
-**Granular edition · Beginner-friendly · 5 hrs/week pace · ~14 months end-to-end**
-
-> This roadmap assumes zero Linux background. Each phase builds on the previous one. Every weekly session has objectives, hands-on exercises with expected outcomes, and a mini-project. Don't skip the projects — they're what employers actually ask about.
-
----
-
-## How to use this roadmap
-
-- **One session = one week (~5 hours).** Spread it across the week however you like; I recommend 3 × 90-min sessions.
-- **Always type commands by hand**, even when copy-pasting is faster. Muscle memory matters.
-- **Set up a lab first.** Recommended: Ubuntu 24.04 LTS in a VM (VirtualBox / UTM / Multipass) or a $5/mo cloud VPS (Hetzner, DigitalOcean). Avoid WSL as your only environment — it hides too much.
-- **Keep a `linux-journal/` git repo** from week 1. Every session, commit notes + scripts + screenshots. This becomes your portfolio.
-- **The "self-check" questions are real.** If you can't answer them out loud, redo the week. No shame, no shortcuts.
 
 ### Phase overview
 

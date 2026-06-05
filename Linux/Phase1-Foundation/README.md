@@ -1,0 +1,39 @@
+# Phase 1 - Foundation
+
+## Index
+- [Understand Operating System and User Environment](info.md)
+	- Distribution info (/etc/os-release)
+	- Host and OS details (hostnamectl)
+	- Kernel and architecture (uname, arch)
+	- User identity and sessions (whoami, id, who, users)
+	- Hostname and uptime
+	- Environment variables and help (env, man, info, --help)
+- [Command Line Interface - 101](cli-basics.md)
+	- Basic navigation: pwd, ls, cd
+	- History and shortcuts: history, !!, !n, clear, reset
+	- Auto completion
+	- Command chaining: ;, &&, ||
+	- Redirection and pipes
+	- Exit and logout
+- [Linux File System](file_system.md)
+	- FHS overview and root directory
+	- Core dirs: /bin, /sbin, /lib, /etc
+	- Variable data: /var, /tmp, /srv
+	- Virtual filesystems: /proc, /sys, /dev, /run
+	- User space: /home, /root, /opt
+	- Boot and mount points: /boot, /mnt, /media
+	- Static vs variable and shareable vs unshareable axes
+	- Tree command for visualization
+- [File Operations](files.md)
+	- Create and view files: touch, echo, cat, less, head, tail
+	- Copy, move, delete: cp, mv, rm, rmdir
+	- File type and info: file, stat, du
+	- Inodes: ls -i, df -i
+	- Permissions and ACLs: ls -l, chmod, chown, getfacl, setfacl
+- [Basic Concepts](basic_concepts.md)
+	- Hard links vs soft links
+	- Absolute vs relative paths
+	- Shell prompt anatomy
+	- PS1 and prompt customization (escape codes)
+- [Users and Groups](users_groups.md)
+	- Topics: TBD
