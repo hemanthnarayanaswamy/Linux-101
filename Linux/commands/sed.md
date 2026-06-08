@@ -46,3 +46,51 @@ sed -i '2i\This is inserted text.' file1.txt
 <table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>sed -n '1p' file</code></td><td>First line</td></tr><tr><td><code>sed -n '$p' file</code></td><td>Last line</td></tr><tr><td><code>sed -n '1~2p' file</code></td><td>Every 2nd line (GNU sed)</td></tr><tr><td><code>sed -n '/error/,+2p' file</code></td><td>Match plus next 2 lines</td></tr><tr><td><code>sed -n '/start/,/end/p' file</code></td><td>Print between patterns</td></tr></tbody></table>
 
 <table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>sed 's/[[:space:]]\+$//' file</code></td><td>Trim trailing whitespace</td></tr><tr><td><code>sed 's/^[[:space:]]\+//' file</code></td><td>Trim leading whitespace</td></tr><tr><td><code>sed 's/[[:space:]]\+/ /g' file</code></td><td>Collapse whitespace</td></tr><tr><td><code>sed '/^#/d;/^$/d' file</code></td><td>Remove comments and blank lines</td></tr><tr><td><code>sed -n 'n;p' file</code></td><td>Print even lines</td></tr></tbody></table>
+
+---
+### Handling Special Characters in Patterns 
+
+**While handling special characters in the search patterns, use `\` escape character, But for characters like `'`, use double quotes `""` on the outside.** 
+
+- Always use double quotes for your sed command, and escape only the backslash needed by sed.
+- 
+```bash
+sed "/your pattern/i\\your text" file
+
+sed "/Clay's Quilt/i\\Hello World" book.txt
+```
+- Double quotes `"..."` → safely allow `'` (no need to escape)
+- sed needs `\` for commands like `i\`
+- Inside `"..."`, you write `\\` so that sed finally sees `\`
+
+- `i\` is enough inside single quotes
+- `i\\` needed inside double quotes (because \ gets consumed by shell)
+
+---
+### Capture Groups
+
+Sed capture groups allow you to grab part of a match and reuse it later in the editing command.
+
+- Easily swap, reorder, or reverse text
+- Extract specific data like log file timestamps
+- Reformat text by rearranging the position of tags
+
+```bash
+sed -E 's/(pattern1) (pattern2)/\2 \1/'
+
+# (pattern1) -> group 1
+# (pattern2) -> group 2
+```
+* `-E` enables extended regex (no need to escape parentheses).
+
+Sed capture groups are defined using parentheses – `()`. Any text matched inside parentheses is captured.
+
+```bash
+sed ‘s/\(Linux\) \(world\)/\2 \1/‘
+```
+This matches and captures "Linux" into group 1. The `\1` in the replacement text refers to the first capture group, inserting "hello" again.
+* We can use Up to `9` capture groups are supported in standard sed.
+
+```ini
+\1, \2, \3 ../9
+```
