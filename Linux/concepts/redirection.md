@@ -76,7 +76,33 @@ command > /dev/null 2>&1
 # or
 command &> /dev/null
 ```
+---
+## `tee` command
 
+If you want to display the output of a command before save it to a file simultaneously, `tee` command is what you need.
+
+![tee](https://linuxhandbook.com/content/images/2020/06/tee-command-explanation.png)
+
+The `TEE` subsystem in Linux refers to a **Trusted Execution Environment**, a secure area within a processor that ensures sensitive data and operations are isolated from the main operating system. It is commonly used in environments requiring high security, such as ARM TrustZone or secure co-processors.
+* While the `tee` command is a utility for managing output streams, the TEE subsystem is a kernel-level feature for secure computing.
+
+##### Display Command output and save it to a file 
+```bash
+wc -l agatha.txt | tee count.txt
+```
+##### Display command output and save it to multiple files
+```bash
+wc -l agatha.txt | tee count1.txt count2.txt
+```
+##### Append output to a file
+```bash
+echo "Additional Line" | tee -a output.txt
+```
+##### Parse the command output to another command while saving it to a file
+```bash
+ls -l | tee count.txt | wc -l
+```
+---
 ## Summary 
 
 Ouput redirection in Bash allows you to control where the output of a command is sent, which is essential for managing data flow in your scripts. 
