@@ -206,3 +206,36 @@ sudo vigr
 These commands lock the files during editing, preventing concurrent modifications.
 
 ---
+## Permissions
+
+use the commands `chmod`, `chown`, `chgrp` to change the permissions on files and directories. 
+
+[umask](https://www.geeksforgeeks.org/linux-unix/umask-command-in-linux-with-examples/) umask (user file-creation mode mask) defines the default permission bits that are removed from newly created files and directories. It acts as a filter, ensuring certain permissions are not granted by default.
+
+By default:
+1. **Files** start with permissions 666 (read & write for all).
+2. **Directories** start with permissions 777 (read, write & execute for all).
+The **umask** value is subtracted from these defaults to determine the final permissions.
+* `0002` The first digit (often 0) is the special mode (sticky/setuid/setgid), and the last three digits represent owner, group, and others restrictions.
+
+```bash
+# To view the umask value 
+umask
+
+# To set a temp umask value
+umask 0644
+
+# To set umask permanently edit files 
+vi /etc/profile   # -> umask 0270
+vi /ect/bashrc    # -> umask u=rwx,g=rx,o=
+```
+
+> `umask` only **removes** permissions, never adds them.
+
+---
+## Special Permissions
+
+* Apart from permissions we have special File Permissions. `SUID` `GUID` and `Sticky Bit`. called ***SPECIAL BITS***.
+
+[Special Bits](../concepts/special_bits.md)
+
