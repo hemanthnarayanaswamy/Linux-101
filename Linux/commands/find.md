@@ -171,7 +171,7 @@ Find files with exactly 644 permissions.
 find /var/www -type f -perm 644
 ```
 
-Find files executable by anyone.
+**Find files executable by anyone.**
 ```
 find /usr -type f -perm /111
 ```

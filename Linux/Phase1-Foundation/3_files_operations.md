@@ -91,6 +91,10 @@ Every file or directory is assigned 3 types of owner:
 2. **Group**: a group can have multiple users. All users in the group have the same permissions to access the file or directory.
 3. **Other**: other means those users who are not owners or members of the group.
 
+* If you are the owner, only the owner’s permissions apply.
+* If not the owner but in the group, only group permissions apply.
+* If neither, others permissions apply.
+
 ## Change Permissions
 
 ```bash
