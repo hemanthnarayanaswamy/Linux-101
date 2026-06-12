@@ -57,7 +57,7 @@ A Linux **shell** is a program that takes commands from the user and passes them
 
 ![proc2](../../resources/assets/process2.png)
 
-> Refer to [Process Management Detailed Guide along with different state explination](../concepts/process.md)
+> Refer to [Process Management Detailed Guide along with different state explination](../concepts/process-management/process.md)
 
 ---
 # Signals in Depth
@@ -66,7 +66,7 @@ A signal is an asynchronous notification the kernel delivers to a process -- **e
 
 Each has a `number`, a `name` and a default `action`. For most signals, a process can do one of three things
 * Let the default happen
-* Catch it (run a handler function to do cleanup or custom logic) -- using [trap](../concepts/signals.md)
+* Catch it (run a handler function to do cleanup or custom logic) -- using [trap](../concepts/process-management/signals.md)
 * Ignore it
 * It can also temporarily block(queue) a signal. 
 
@@ -124,7 +124,7 @@ Job control is made possible by the `shell`
 - **Background jobs** Run independently without blocking the terminal, allowing users to continue entering commands
 
 ### Job States
-Jobs reported by the [jobs](../commands/jobs.md) command can be in one of these states:
+Jobs reported by the [jobs](../commands/process-management/jobs.md) command can be in one of these states:
 
 - **Running** — the process is actively executing in the background.
 - **Stopped** — the process has been suspended, typically by pressing Ctrl+Z.
@@ -187,3 +187,10 @@ Job specifications (job specs) let you target a specific job when using commands
     * For example, `%ping` matches a job started with `ping google.com`.
 - `%?string` — the job whose command contains string anywhere. 
     * For example, `%?google` also matches `ping google.com.`
+
+---
+# Monitoring and load Average
+
+
+---
+# Task Priority 

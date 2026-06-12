@@ -4,7 +4,7 @@ A signal is an asynchronous notification -- **essentailly a software interrupt**
 
 Each signal has a `number`, a `name` and a default `action`. For most signals, a process can do one of three things
 * Let the default happen
-* Catch it (run a handler function to do cleanup or custom logic) -- using [trap](../concepts/signals.md)
+* Catch it (run a handler function to do cleanup or custom logic) -- using [trap](./signals.md)
 * Ignore it
 * It can also temporarily block(queue) a signal. Blocked signals remain pending until unblocked.
 
@@ -63,7 +63,7 @@ The most commonly used signals are:
 - `9 (KILL)` - Kill a process immediately.
 - `15 (TERM)` - Gracefully stop a process.
 
-> Refer to go in detail about [kill](../commands/kill.md)
+> Refer to go in detail about [kill](../../commands/process-management/kill.md)
 ---
 #### Why `kill -9` actually bypasses
 
@@ -119,7 +119,7 @@ ps -axo stat,pid,comm | grep -w Z
 ```
 **you cannot directly kill a zombie process because it is already dead. However, you can kill its parent process, which will cause the init process (PID 1) to adopt the zombie processes and clean them up.**
 
-First, identify the `parent process ID (PPID)` of the zombie process using the [ps](../commands/ps.md) command, The use [kill](../commands/kill.md) to send a singal to the parent process. 
+First, identify the `parent process ID (PPID)` of the zombie process using the [ps](../../commands/process-management/ps_pstree.md) command, The use [kill](../../commands/process-management/kill.md) to send a singal to the parent process. 
 
 ```bash
 kill -TERM <parent_pid>  # a polite termination request

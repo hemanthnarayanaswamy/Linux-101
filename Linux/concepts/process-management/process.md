@@ -15,7 +15,7 @@ There is no *"create process from nothing"* call.
 3. `wait()` is how the parent collects a finished child. 
     * when the parent calls `wait()/waitpid()`, it blocks untill a child exits and then receives that child's exit status. This act is called `reaping`. 
 
-![proc1](../../resources/assets/process1.png)
+![proc1](../../../resources/assets/process1.png)
 
 4. `zombie`/`state z` is the process that has exited but hasn't been reaped yet. 
     * The kernel can't fully discard it because it must hold the exit status until the parent asks for it. 
@@ -55,7 +55,7 @@ A Linux **shell** is a program that takes commands from the user and passes them
    - And when the terminal itself goes away (close the window or ssh drops), the kernel sends **SIGHUP** (hangup signal) to the session, and the shell relays it to its jobs.
    - Since `SIGHIP` signal default action is *terminate*, this is the mechamism that kills your background jobs when you log out.
 
-![proc2](../../resources/assets/process2.png)
+![proc2](../../../resources/assets/process2.png)
 
 ---
 ## 3. [The Linux Process States](https://www.baeldung.com/linux/process-states)
@@ -98,15 +98,15 @@ There are two different sleeping states:
 When a process has completed its execution or is terminated, it’ll send the `SIGCHLD` signal to the **parent process** and go into the zombie state. and will remain in this stae untill the parent process clears it off from te process table. 
 > To clear the terminated child process off the process table, the parent process must read the exit value of the child process using the `wait() or waitpid()` system calls.
 
-![process3](../../resources/assets/process3.png)
+![process3](../../../resources/assets/process3.png)
 ---
 ### 4. Checking Process State
 
 we can use command-line tools like `ps` and `top` to check the state of processes.
 
-[ps](../commands/ps.md)
-[top](../commands/top.md)
+[ps](../../commands/process-management/ps_pstree.md)
+[top](../../commands/system-monitoring/top_htop.md)
 
-To Terminate the process manually. The [kill](../commands/kill.md) command sends a signal to a process which terminates the process. If the user doesn’t specify any signal which is to be sent along with kill command then default TERM signal is sent that terminates the process.
+To Terminate the process manually. The [kill](../../commands/process-management/kill.md) command sends a signal to a process which terminates the process. If the user doesn’t specify any signal which is to be sent along with kill command then default TERM signal is sent that terminates the process.
 
 Refer to [SIGNALS](./signals.md)
