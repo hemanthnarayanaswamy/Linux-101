@@ -91,7 +91,7 @@ Records authentication-related events:
 <tr>
 <td>who</td>
 <td>Lists all logged-in users</td>
-<td><a href="../commands/who.md">who command</a></td>
+<td><a href="../commands/users-groups-permissions/who.md">who command</a></td>
 </tr>
 <tr>
 <td>id</td>
@@ -132,22 +132,22 @@ cat /etc/gshadow          # View secure group information
 <tr>
 <td>useradd</td>
 <td>Create a new user account</td>
-<td><a href="../commands/useradd.md">useradd command</a></td>
+<td><a href="../commands/users-groups-permissions/useradd.md">useradd command</a></td>
 </tr>
 <tr>
 <td>userdel</td>
 <td>Delete an existing user</td>
-<td><a href="../commands/userdel.md">userdel command</a></td>
+<td><a href="../commands/users-groups-permissions/userdel.md">userdel command</a></td>
 </tr>
 <tr>
 <td>usermod</td>
 <td>Modify user account</td>
-<td><a href="../commands/usermod.md">usermod command</a></td>
+<td><a href="../commands/users-groups-permissions/usermod.md">usermod command</a></td>
 </tr>
 <tr>
 <td>passwd</td>
 <td>Manage use passwords</td>
-<td><a href="../commands/passwd.md">passwd command</a></td>
+<td><a href="../commands/users-groups-permissions/passwd.md">passwd command</a></td>
 </tr>
 </tbody>
 </table>
@@ -237,5 +237,5 @@ vi /ect/bashrc    # -> umask u=rwx,g=rx,o=
 
 * Apart from permissions we have special File Permissions. `SUID` `GUID` and `Sticky Bit`. called ***SPECIAL BITS***.
 
-[Special Bits](../concepts/special_bits.md)
+[Special Bits](../concepts/filesystem-permissions/special_bits.md)
 

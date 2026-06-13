@@ -119,7 +119,7 @@ sudo apt-mark unhold nginx              # Unhold a package
 apt-mark showhold                       # List held packages
 ```
 
-Refer to [APT Detailed Guide](../commands/apt.md) for advance usage.
+Refer to [APT Detailed Guide](../commands/package-management/apt.md) for advance usage.
 
 ### 2. YUM (Yellowdog Updater Modified) – RHEL/CentOS Systems
 

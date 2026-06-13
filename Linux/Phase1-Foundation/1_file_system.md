@@ -150,4 +150,4 @@ root@ubuntu-host / ✖ tree -d -L 1
 ├── usr
 └── var
 ```
-[tree](../commands/tree.md)
+[tree](../commands/file-search-navigation/tree.md)

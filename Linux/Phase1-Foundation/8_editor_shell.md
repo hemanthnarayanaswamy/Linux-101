@@ -156,4 +156,4 @@ mkcd() { mkdir -p "$1" && cd "$1"; }
 
 ### `tmux` - The terminal multiplexer
 
-Learn more about [tmux](../commands/tmux.md)
+Learn more about [tmux](../commands/shell-terminal-editors/tmux.md)

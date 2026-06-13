@@ -152,4 +152,4 @@ sudo add-apt-repository --remove "deb [arch=amd64] https://download.docker.com/l
 
 ## Work Flow
 
-![package manager](../../resources/assets/apt.png)
+![package manager](../../../resources/assets/apt.png)

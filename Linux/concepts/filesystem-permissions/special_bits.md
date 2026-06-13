@@ -71,7 +71,7 @@ But what if the file doesn’t have execute bit set in the first place?
 *The `S` as SUID flag means there is an error that you should look into. You want the file to be executed with the same permission as the owner but there is no executable permission on the file. Which means that not even the owner is allowed to execute the file and if file cannot be executed, you won’t get the permission as the owner. This fails the entire point of setting the SUID bit.*
 
 ### How to Find all files with SUID set ?
-If you want to search files with this permission, Use the [find](../commands/find.md) command with `-perm` option
+If you want to search files with this permission, Use the [find](../../commands/file-search-navigation/find.md) command with `-perm` option
 
 ```bash
 # Find all SUID files
