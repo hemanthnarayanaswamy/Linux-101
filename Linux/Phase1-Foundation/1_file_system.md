@@ -32,7 +32,9 @@ Early Unix systems ran out of disk space, so developers added another disk and m
 ### Variable data: `/var`, `/tmp`, `/srv`
 
 This group is defined by one shared property: **the data here changes during normal operation**. 
+
 5. `/var` short for *("variable")*  is where programs store runtime information like **system logs** in `/var/log`, the print and mail queues in `/var/spool`, package manager caches in `/var/cache`, **databases**, and website files for some server setups in `/var/www`. 
+
     * The files stored here are NOT cleaned automatically and hence it provides a good place for system administrators to look for information about their system behavior. 
     * When a disk fills up unexpectedly, `/var/log` is usually the first place to look.
 
