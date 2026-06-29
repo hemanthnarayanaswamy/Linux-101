@@ -4,24 +4,6 @@
 > [linux-mastery-roadmap.md](../resources/roadMap/linux-mastery-roadmap.md) and
 > [linux-mastery-roadmap-detailed.md](../resources/roadMap/linux-mastery-roadmap-detailed.md).
 
-## How to use this file
-
-This is a **practice exam, not a tutorial**. There is no answer key on purpose — the roadmap's own
-rule is "man page before Stack Overflow, always," and the way you actually learn this material is by
-running it and watching what happens, not by reading what someone else says will happen.
-
-- Work on a real (or VM/container) Linux box. Almost every question expects a terminal in front of you.
-- If you're unsure, treat that as a generated to-do: `man`, `--help`, or your own
-  [Phase1-Foundation notes](../Linux/Phase1-Foundation/) are where you go — not back here.
-- Don't skip the 🧩 **Scenario** and 🚀 **Challenge** items even if the 🟢 **Recall** items felt easy.
-  Recall tells you that you remember a flag; scenarios tell you whether you understand *why* it exists.
-- For the 🎙 **Oral drill** section at the end: answer out loud or on video, no terminal, no notes.
-  If you hesitate more than 10 seconds, that's a gap — go fix it, then come back.
-- Come back to this file cold in a month. If you can do it end-to-end without friction, Phase 1 is
-  actually done — not just read.
-
-**Legend**: 🟢 Recall &nbsp;|&nbsp; 🛠 Hands-on lab &nbsp;|&nbsp; 🧩 Scenario / troubleshooting &nbsp;|&nbsp; 🚀 Multi-command challenge
-
 ---
 
 ## Table of Contents
@@ -57,16 +39,35 @@ Notes: [0_info.md](../Linux/Phase1-Foundation/0_info.md)
 7. A new teammate SSHs into a box you've never seen and asks "what is this thing?" Produce, with a
    single command each: OS name+version, kernel version, CPU architecture, hostname, and how long
    it's been up. Write down the five commands.
+```bash
+hostnamectl
+```
 8. Read `/proc/cpuinfo` and `/proc/meminfo` directly (no `lscpu`/`free`). Find: number of logical
    CPUs, total RAM, and the CPU model name, using only `cat`/`grep`/`wc` on those two files.
+```bash
+cat /proc/cpuinfo | grep processor | wc -l
+# 16
+
+# To get the CPU Model
+cat /proc/cpuinfo | grep -m 1 "model name"
+
+cat /proc/meminfo
+```
 9. Run `uptime` and interpret the three load-average numbers against the CPU count you found above.
    Is the box currently under-loaded, fine, or overloaded? Justify the number, don't guess.
+```bash
+# Refer to the cpu.md or system_laod.md to know more about cpu and system load
 
+uptime # to check the system load 1 5 15 min intervaled
+```
 ### 🧩 Scenario
 
 10. A script you inherited checks `cat /etc/issue` to detect the distro and breaks on a new server.
     What's wrong with using `/etc/issue` for this, and what file should it parse instead, and why is
     that file more reliable?
+- `cat /etc/issue`: is a text file on Unix/Linux systems that displays a pre‑login message—typically system identification such as OS name, version, or kernel—before the login prompt appears.
+- `cat /etc/issue.net` – Similar purpose but used for network logins (e.g., SSH, telnet). If configured, SSH displays `/etc/issue.net` instead of `/etc/issue`.
+- To get the proper os information `cat /etc/os-release`
 
 ---
 
@@ -708,3 +709,5 @@ under a minute, that's your real signal to go back and re-drill that section.
     should never rely on `/tmp` to keep.
 15. Explain what a controlling terminal is, and why closing your terminal window can kill background
     jobs you forgot to `nohup` or `disown`.
+
+
