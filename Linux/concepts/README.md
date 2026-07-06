@@ -10,6 +10,21 @@ Concept notes are grouped by common Linux learning area.
 | Special permission bits | [special_bits.md](./filesystem-permissions/special_bits.md) |
 | Umask | [umask.md](./filesystem-permissions/umask.md) |
 
+## Networking
+
+| Concept | Notes |
+|:--------|:------|
+| OSI model | [osi_model.md](./networking/osi_model.md) — TODO |
+| CIDR and subnetting | [cidr_subnetting.md](./networking/cidr_subnetting.md) — TODO |
+| TCP | [tcp.md](./networking/tcp.md) |
+| UDP | [udp.md](./networking/udp.md) |
+
+## SSH
+
+| Concept | Notes |
+|:--------|:------|
+| SSH deep dive (keys, agent, tunnels, bastion) | [ssh_deepdive.md](./ssh/ssh_deepdive.md) — TODO |
+
 ## Package Management
 
 | Concept | Notes |

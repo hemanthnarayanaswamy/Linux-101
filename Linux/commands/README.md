@@ -41,6 +41,47 @@ Commands are grouped by common Linux usage area.
 | `locate` | [locate.md](./file-search-navigation/locate.md) |
 | `tree` | [tree.md](./file-search-navigation/tree.md) |
 
+## Network Diagnostics
+
+| Command | Notes |
+|:--------|:------|
+| `ping` | [ping.md](./network-diagnostics/ping.md) |
+| `traceroute` | [traceroute.md](./network-diagnostics/traceroute.md) |
+| `mtr` | [mtr.md](./network-diagnostics/mtr.md) |
+| `tcpdump` | [tcpdump.md](./network-diagnostics/tcpdump.md) |
+| `nc` | [nc.md](./network-diagnostics/nc.md) |
+| `nmap` | [nmap.md](./network-diagnostics/nmap.md) — TODO |
+
+## Network Interfaces and Configuration
+
+| Command | Notes |
+|:--------|:------|
+| `ip` | [ip.md](./network-interfaces/ip.md) |
+| `ss` | [ss.md](./network-interfaces/ss.md) |
+| `nmcli`, netplan | [nmcli_netplan.md](./network-interfaces/nmcli_netplan.md) — TODO |
+
+## DNS and Name Resolution
+
+| Command | Notes |
+|:--------|:------|
+| `dig`, `nslookup`, `host` | [dig_nslookup_host.md](./dns/dig_nslookup_host.md) |
+
+## SSH and Remote Access
+
+| Command | Notes |
+|:--------|:------|
+| `sshpass` | [ssh_sshpass.md](./ssh/ssh_sshpass.md) |
+| `ssh-keygen`, `ssh-agent`, `ssh-add`, `~/.ssh/config`, `ProxyJump` | [ssh_keys_agent_config.md](./ssh/ssh_keys_agent_config.md) — TODO |
+| `scp`, `rsync` | [scp_rsync.md](./ssh/scp_rsync.md) — TODO |
+
+## Firewall
+
+| Command | Notes |
+|:--------|:------|
+| `ufw` | [ufw.md](./firewall/ufw.md) |
+| `nftables` | [nftables.md](./firewall/nftables.md) — TODO |
+| `iptables` | [iptables.md](./firewall/iptables.md) — TODO |
+
 ## Package Management
 
 | Command | Notes |
