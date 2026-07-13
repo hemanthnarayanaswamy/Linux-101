@@ -1,23 +1,133 @@
-# SSH Deep Dive
+# How Does SSH Work ?
 
-> STATUS: TODO — stub only. This is the concept-level companion to [ssh_keys_agent_config.md](../../commands/ssh/ssh_keys_agent_config.md) and [scp_rsync.md](../../commands/ssh/scp_rsync.md). Fill in as you work through Week 18 (Roadmap Phase 3). [5_ssh_remote_access.md](../../Phase2-Networking/5_ssh_remote_access.md) currently only covers the basic client/server model — the material below is what's still missing.
+SSH consists of three distinct layers:
+1. **The transport layer** establishes safe and secure communication between a client and a server during and after authentication. It oversees data encryption, decryption, and integrity protection. Furthermore, it helps speed up data exchange by providing data compression and caching.
+2. **The authentication layer** communicates the supported authentication methods to the client. It also conducts the entire user authentication process.
+3. **The connection layer** manages the communication between the machines after the authentication succeeds. It handles the opening and closing of communication channels and allows multiple channels for multiple sessions.
 
-## To Cover
+After running the command `ssh [username]@[server_ip_or_hostname]` the server receives a request. 
 
-- [ ] Why SSH exists: encrypted remote shell over an untrusted network, replacing telnet/rsh.
-- [ ] Asymmetric key exchange at a conceptual level: public/private key pair, why the private key never leaves your machine.
-- [ ] Why `ed25519` is preferred over RSA (smaller keys, faster, modern curve — no known practical break).
-- [ ] Host key verification: what `known_hosts` protects against (MITM on first connect), and what "the authenticity of host X can't be established" actually means.
-- [ ] `authorized_keys` — how the server decides which public keys may log in as which user.
-- [ ] `ssh-agent` — what problem it solves (unlock a key once per session instead of per connection) and how forwarding (`-A`) extends that to a jump chain.
-- [ ] Port forwarding conceptually:
-  - Local (`-L`): expose a *remote* service on your *local* port.
-  - Remote (`-R`): expose a *local* service on the *remote* machine's port.
-  - Dynamic (`-D`): turn SSH into a SOCKS proxy for arbitrary outbound traffic.
-- [ ] `ProxyJump` / bastion architecture: why you'd never expose `internal` directly, and how one hop (`bastion`) becomes the single point of SSH entry.
-- [ ] Hardening checklist: non-default port, key-only auth (`PasswordAuthentication no`), `AllowUsers`/source-IP restriction, fail2ban or rate limiting — ties into [4_Firewalls.md](../../Phase2-Networking/4_Firewalls.md).
+When the server receives the requests, a session *encryption negotiation begins*. 
 
-## Self-Check (from the roadmap)
+* The server sends the client a set of supported encryption protocols. The server uses the *public key* as the authentication method.
+* The client compares the protocols to its own set. If there are matching protocols, the machines agree to use one to establish the connection. The client compares *the server’s public key to the stored private key stored in its system* on the first connection attempt. If the keys match, the client and the server agree to use symmetric encryption to communicate during the SSH session. 
+* After the server is verified, both the parties negotiate a session key using a version of something called the **Diffie-Hellman algorithm**. This algorithm is designed in such a way that both the parties contribute equally in generation of session key. The generated session key is shared symmetric key i.e. the same key is used for encryption and decryption.
 
-- Why prefer ed25519 over RSA?
-- What's the difference between `-L` and `-R` port forwarding?
+Once the [sercret key](A-secret-key-is-a-confidential-piece-of-used-in-cryptography-to-secure-data.-It-acts-as-a-digital-code-that-enables-encryption-and-decryption,-ensuring-that-only-authorized-parties-can-access-protected-information.) is calculated. The server then attempts to authenticate the user who request access. 
+
+![ssh](https://assets.bytebytego.com/diagrams/0224-how-does-ssh-work.png)
+
+### User Authentication
+
+The two most common SSH user authentication methods used are 
+1. Passwords 
+2. SSH keys.
+
+Password authentication involves using a username and password to log in, while ssh key authentication uses a pair of cryptographic keys – a public key that is stored on the server and a private key that remains on the client.
+
+The clients safely send encrypted passwords to the server. The passwords are a risky authentication method. Asymmetrically encrypted SSH public-private key pairs are a better option. Once the client decrypts the message, the server grants the client access to the system.
+
+---
+
+## SSH Keys
+
+SSH keys allow users to authenticate securely with remote servers. They replace the need for passwords by using keys. SSH keys always come in *key pairs*, consisting of:
+
+- `Public key` - Everyone can see it, no need to protect it (for encryption function).
+- `Private key` - Stays in the computer, must be protected (for decryption function).
+
+
+### Techniques Used in SSH
+
+SSH uses three data encryption types during the communication between the machines. These are:
+
+###### 1. Symmetric encryption
+Same secret key is used for both encrypting and decrypting data. In SSH, this technique is mainly used after the connection is established.
+
+- Requires a single shared secret key between sender and receiver.
+- Very fast and efficient for encrypting large amounts of data.
+- Common algorithms include *AES* and *DES*
+
+Whenever the client and the server negotiate which algorithm to use for an SSH session, they always choose the first algorithm on the client’s list that the server supports.
+
+###### 2. Asymmetric encryption
+Data is asymmetrically encrypted when machines use two different but mathematically related keys, public and private, to perform the encryption. The client machine that participated in setting up the encryption can decrypt the information using the private key. SSH uses temporal asymmetric keys to exchange symmetric keys, such as during the user authentication process.
+
+SSH uses this technique to authenticate users and securely exchange keys without exposing sensitive information.
+
+- Public key is shared openly, while the private key remains secret.
+- Used mainly for user authentication and key exchange.
+- Common algorithms include `RSA` and `DSA`.
+
+![as](https://media.geeksforgeeks.org/wp-content/uploads/20260120123028571995/asymmetric_encryption.webp)
+
+###### Hashing
+SSH uses hashing to validate if the data packets come from the source they appear to come from. Hashing algorithms used to produce hashes in SSH are `Message Authentication Code` (MAC) and `Hashed Message Authentication Code` (HMAC).
+
+It is a cryptographic process that converts input data of any size into a fixed-length value called a `hash`.
+- Produces a unique hash value for given input data.
+- Even a small change in data results in a completely different hash.
+- Helps detect tampering during communication.
+
+The receiving machine knows the algorithm used to create the hash and can apply it to the data. The purpose is to see if the calculated hash value will be the same. If the obtained hash value differs from the sender’s hash, the data got corrupted during the transfer.
+
+![hash](https://media.geeksforgeeks.org/wp-content/uploads/20260120121858720879/combination_logic_circuits.webp)
+
+### Components of SSH Keys
+
+The ssh key-pair is generated on the **CLIENT SIDE**, where `private key` stays in clients system, while the public should be shared with the server and be stored on the server. 
+
+###### 1. Public Key
+A public key is the part of an SSH key pair stored on the *server* to authorize a user’s access. It works with the private key to verify the client’s identity, enabling secure, password less authentication.
+
+- Stored in the server’s `~/.ssh/authorized_keys` file.
+- Cannot decrypt data or log in by itself, ensuring security even if exposed.
+- Used during authentication to validate the client without transmitting sensitive information.
+
+###### 2. Private Key
+A private key is kept securely on the client device and is used to prove the user’s identity to the server. It must remain secret, as possession of the private key allows access to servers authorized for that key.
+
+- Generates cryptographic signatures during authentication.
+- Never transmitted over the network to maintain security.
+- Provides the “unlocking” capability for the server’s public key “lock.”
+
+###### Key Pair Relationship
+The public and private keys are mathematically linked, forming a pair that enables secure authentication. The private key signs authentication challenges, which the server verifies with the public key to allow access.
+
+- Ensures the private key never leaves the client device.
+- Enables password less login while maintaining strong security.
+- Forms the basis for asymmetric encryption used in SSH.
+
+### Types of Keys
+
+1. **User Authentication Keys** These are used to verify the identity of a user when connecting to a remote server using SSH.
+2. **Host Keys** These keys are used by SSH servers to prove their identity to connecting clients. They help clients confirm that they are communicating with the correct server and not an impersonator.
+3. **Session Keys** Session keys are temporary symmetric keys generated during an SSH connection to encrypt data exchanged between the client and server. They are created after authentication is completed.
+
+## SSH Key Authentication Working
+
+1. **Client starts the connection**: The user’s computer (client) tries to connect to a remote server using the SSH protocol.
+
+2. **Server checks authentication method:** The server checks whether SSH key–based authentication is enabled and allowed for login.
+
+3. **Client sends its public key**: The client sends its public key to the server. This key does not contain any secret information and is safe to share.
+
+4. **Server checks authorized keys**: The server looks inside its `authorized_keys` file to see if the received public key is already registered.
+- If the key is not found, access is denied.
+- If the key is found, the process continues.
+  
+5. **Server creates a challenge**: To confirm the client’s identity, the server creates a random piece of data called a *challenge* and sends it to the client.
+
+6. **Client signs the challenge**: The client uses its private key to sign the challenge
+- The private key never leaves the client’s machine.
+- Only the correct private key can create a valid signature.
+  
+7. **Client sends signed response**: The signed challenge is sent back to the server as proof that the client owns the private key.
+
+8. **Server verifies the signature**: The server uses the stored public key to verify the signature
+- If the signature matches, the client is authenticated.
+- If it doesn’t match, access is denied.
+
+9. **Secure access is granted**: Once verified, the server allows the client to log in securely without asking for a password.
+
+
