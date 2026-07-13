@@ -130,4 +130,33 @@ The public and private keys are mathematically linked, forming a pair that enabl
 
 9. **Secure access is granted**: Once verified, the server allows the client to log in securely without asking for a password.
 
+## How To Generate SSH Key with [ssh-keygen](../../commands/ssh/ssh_keys_agent_config.md) in Linux ? 
 
+[ssh-keygen](../../commands/ssh/ssh_keys_agent_config.md) is the utility used to generate, manage, and convert authentication keys for SSH. ssh-keygen comes installed with SSH in most of the operating systems. 
+
+SSH protocol supports several public key types for authentication keys. The key type and key size both matter for security.
+
+When generating a key, we need to decide three things: 
+
+1. **KEY ALGORITHM**: 
+For the key algorithm, we need to take into account its compatibility.
+2. **KEY SIZE**:
+For the key size, we need to select a bit length of at least 2048 when using RSA and 256 when using ECDSA; these are the smallest key sizes allowed for SSL certificates.
+3. **PASSPHRASE**:
+For the passphrase, we need to decide whether we want to use one. If used, the private key will be encrypted using the specified encryption method, and it will be impossible to use without the passphrase.
+
+`ssh-keygen` is able to generate a key using one of the following different digital signature algorithms.
+- *rsa* – Widely supported, but less secure at shorter key lengths.
+- *dsa* – Deprecated; avoid using.
+- *ecdsa* – Smaller and faster than RSA; based on elliptic curve cryptography.
+- *ed25519* – Modern, fast, and secure; recommended.
+- *ecdsa-sk / ed25519-sk* – Secure key variants for use with FIDO/U2F hardware tokens.
+
+Based on the difference of each SSH key type, we recommend the following ways to generate SSH key file.
+
+```bash
+ssh-keygen -t rsa -b 4096
+ssh-keygen -t dsa
+ssh-keygen -t ecdsa -b 521
+ssh-keygen -t ed25519
+```
