@@ -82,6 +82,58 @@ Commands are grouped by common Linux usage area.
 | `nftables` | [nftables.md](./firewall/nftables.md) — TODO |
 | `iptables` | [iptables.md](./firewall/iptables.md) — TODO |
 
+## systemd and Service Management
+
+| Command | Notes |
+|:--------|:------|
+| `systemctl` | [systemctl.md](./systemd/systemctl.md) |
+| `journalctl` | [journalctl.md](./systemd/journalctl.md) |
+| `systemd-analyze` | [systemd-analyze.md](./systemd/systemd-analyze.md) |
+
+## Logging
+
+| Command | Notes |
+|:--------|:------|
+| `logrotate` | [logrotate.md](./logging/logrotate.md) |
+| `dmesg` | [dmesg.md](./logging/dmesg.md) |
+
+## Storage and Filesystems
+
+| Command | Notes |
+|:--------|:------|
+| `lsblk`, `blkid` | [lsblk_blkid.md](./storage/lsblk_blkid.md) |
+| `parted`, `fdisk`, `gdisk` | [parted_fdisk_gdisk.md](./storage/parted_fdisk_gdisk.md) |
+| `pvcreate`, `vgcreate`, `lvcreate`, `lvextend`, `vgextend` | [lvm.md](./storage/lvm.md) |
+| `mkfs`, `fsck`, `tune2fs`, `resize2fs` | [mkfs_fsck_tune2fs.md](./storage/mkfs_fsck_tune2fs.md) |
+| `mount`, `umount` | [mount_umount.md](./storage/mount_umount.md) |
+| `exportfs`, `showmount` (NFS) | [nfs.md](./storage/nfs.md) |
+
+## Security and Hardening
+
+| Command | Notes |
+|:--------|:------|
+| SSH server hardening (`sshd_config`, `sshd -T`) | [sshd_hardening.md](./ssh/sshd_hardening.md) |
+| `fail2ban` | [fail2ban.md](./security/fail2ban.md) |
+| AppArmor (`aa-status`, `aa-enforce`, `aa-complain`) | [apparmor.md](./security/apparmor.md) |
+| SELinux (`getenforce`, `setenforce`, `audit2allow`) | [selinux.md](./security/selinux.md) |
+| `auditctl`, `ausearch`, `aureport` | [auditd.md](./security/auditd.md) |
+| AIDE, Lynis | [aide_lynis.md](./security/aide_lynis.md) |
+| `last`, `lastb`, `lastlog` | [login_tracking.md](./security/login_tracking.md) |
+
+## Performance and Troubleshooting
+
+| Command | Notes |
+|:--------|:------|
+| `vmstat`, `mpstat`, `pidstat` | [vmstat_mpstat_pidstat.md](./performance/vmstat_mpstat_pidstat.md) |
+| `free` | [free.md](./performance/free.md) |
+| `iostat`, `iotop` | [iostat_iotop.md](./performance/iostat_iotop.md) |
+| `sar`, `dstat` | [sar_dstat.md](./performance/sar_dstat.md) |
+| `lsof` | [lsof.md](./performance/lsof.md) |
+| `stress-ng` | [stress-ng.md](./performance/stress-ng.md) |
+| `iperf3`, `tc`, `nstat` | [iperf3_tc.md](./performance/iperf3_tc.md) |
+| `strace`, `ltrace` | [strace_ltrace.md](./performance/strace_ltrace.md) |
+| `perf`, `bpftrace` | [perf_bpftrace.md](./performance/perf_bpftrace.md) |
+
 ## Package Management
 
 | Command | Notes |

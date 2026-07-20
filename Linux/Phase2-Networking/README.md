@@ -1,25 +1,22 @@
 # Phase 2 - Networking
 
-This directory is "Phase 3 — Networking (Weeks 15–20)" in the detailed roadmap. It's numbered Phase 2 in this repo because Phase 2 of the roadmap (Shell Scripting & Automation) was skipped.
+This is Phase 3 (Networking) of the roadmap, kept as Phase 2 in this repo because the roadmap's Phase 2 (Shell Scripting & Automation) was skipped.
 
 Primary roadmap sources:
 
 - [linux-mastery-roadmap.md](../../resources/roadMap/linux-mastery-roadmap.md)
-- [linux-mastery-roadmap-detailed.md](../../resources/roadMap/linux-mastery-roadmap-detailed.md) — see "Phase 3 — Networking (Weeks 15–20)"
+- [linux-mastery-roadmap-detailed.md](../../resources/roadMap/linux-mastery-roadmap-detailed.md)
 - [networking-roadmap.md](../../resources/roadMap/networking-roadmap.md)
-
-> Note: the note files in this folder are numbered 1–5 in the order they were written, not in roadmap week order — file 4 (`Firewalls`, Week 19) was written before file 5 (`SSH`, Week 18). The table below is ordered by **roadmap week**, so use it (not the filenames) to navigate/revise in the intended sequence.
 
 ## Quick Index
 
-| Week | Topic | Main Note | Status |
-|---:|:------|:----------|:-------|
-| 15 | Networking fundamentals (OSI, TCP/IP, ports) | [1_intro_networking.md](./1_intro_networking.md) | Solid |
-| 16 | Linux networking tools (`ip`, `ss`, interfaces) | [2._Linux_Networking_Fundmentals.md](./2._Linux_Networking_Fundmentals.md) | Gaps: nmcli/netplan |
-| 17 | DNS and name resolution | [3_DNS_and_NameResolution.md](./3_DNS_and_NameResolution.md) | Solid |
-| 18 | SSH deep dive | [5_ssh_remote_access.md](./5_ssh_remote_access.md) | Stub only — biggest gap |
-| 19 | Firewalls (`ufw`, nftables, iptables) | [4_Firewalls.md](./4_Firewalls.md) | Solid concepts; commands are TODO |
-| 20 | Capstone: three-tier home lab network | *(not started)* | Not started |
+| Order | Topic | Main Note |
+|---:|:------|:----------|
+| 1 | Introduction to networking | [1_intro_networking.md](./1_intro_networking.md) |
+| 2 | Linux networking tools and fundamentals | [2._Linux_Networking_Fundmentals.md](./2._Linux_Networking_Fundmentals.md) |
+| 3 | DNS and name resolution | [3_DNS_and_NameResolution.md](./3_DNS_and_NameResolution.md) |
+| 4 | Firewalls | [4_Firewalls.md](./4_Firewalls.md) |
+| 5 | SSH and remote access | [5_ssh_remote_access.md](./5_ssh_remote_access.md) |
 
 ## Reference Indexes
 
@@ -30,9 +27,9 @@ Primary roadmap sources:
 
 ---
 
-## 15. Networking Fundamentals
+## 1. Introduction To Networking
 
-OSI layers, TCP/IP, IPv4/CIDR, ports, three-way handshake.
+Build the mental model: OSI layers, TCP/IP, IPv4 addressing and CIDR, ports, and the TCP three-way handshake.
 
 Main note:
 
@@ -40,8 +37,8 @@ Main note:
 
 Concepts:
 
-- [OSI model](../concepts/networking/osi_model.md) — TODO
-- [CIDR and subnetting](../concepts/networking/cidr_subnetting.md) — TODO
+- [OSI model](../concepts/networking/osi_model.md)
+- [CIDR and subnetting](../concepts/networking/cidr_subnetting.md)
 - [TCP](../concepts/networking/tcp.md)
 - [UDP](../concepts/networking/udp.md)
 
@@ -52,17 +49,11 @@ Commands:
 - [`mtr`](../commands/network-diagnostics/mtr.md)
 - [`nc`](../commands/network-diagnostics/nc.md)
 
-Still to do (from the roadmap exercises/mini-project):
-
-- [ ] Draw the OSI model by hand, one protocol per layer.
-- [ ] Work through `/24`, `/16`, `/8` host-count math.
-- [ ] "My network diagram" mini-project (home network, draw.io/excalidraw).
-
 ---
 
-## 16. Linux Networking Tools
+## 2. Linux Networking Tools And Fundamentals
 
-Replacing `ifconfig`/`netstat`/`route` with `ip`/`ss`; interface and route configuration.
+Replace the deprecated tools (`ifconfig`, `netstat`, `route`) with the modern `ip`/`ss` stack, and configure interfaces and routes.
 
 Main note:
 
@@ -75,38 +66,54 @@ Commands:
 - [`ping`](../commands/network-diagnostics/ping.md)
 - [`mtr`](../commands/network-diagnostics/mtr.md)
 - [`tcpdump`](../commands/network-diagnostics/tcpdump.md)
-- [`nmcli`, netplan](../commands/network-interfaces/nmcli_netplan.md) — TODO
-
-Still to do:
-
-- [ ] `nmcli` basics (list/activate/deactivate profiles, assign static IP).
-- [ ] Netplan static IP config with `netplan try` in a VM.
-- [ ] "ss/ip cheat sheet" mini-project — 15 networking commands, modern tool + deprecated equivalent side by side.
+- [`nmcli`, netplan](../commands/network-interfaces/nmcli_netplan.md)
 
 ---
 
-## 17. DNS and Name Resolution
+## 3. DNS And Name Resolution
 
-Resolution order, record types, `dig`, `systemd-resolved`, TTL/caching.
+Understand how a hostname becomes an IP, the resolution order, record types, and how to diagnose DNS issues.
 
 Main note:
 
 - [3_DNS_and_NameResolution.md](./3_DNS_and_NameResolution.md)
 
+Concepts:
+
+- [UDP](../concepts/networking/udp.md)
+
 Commands:
 
 - [`dig`, `nslookup`, `host`](../commands/dns/dig_nslookup_host.md)
-- [`nmap`](../commands/network-diagnostics/nmap.md) — TODO (bonus, referenced from the DNS note but not roadmap-required)
-
-Still to do:
-
-- [ ] "Tiny local DNS resolver" mini-project — `dnsmasq` for `*.lab` domains, forwarding to `1.1.1.1`, with caching (no note or command file yet — consider a `dnsmasq.md` command file if you go through this).
+- [`nmap`](../commands/network-diagnostics/nmap.md)
+- [`tcpdump`](../commands/network-diagnostics/tcpdump.md)
 
 ---
 
-## 18. SSH Deep Dive
+## 4. Firewalls
 
-**Biggest gap in this phase.** [5_ssh_remote_access.md](./5_ssh_remote_access.md) only covers the client/server model and confirming TCP/22 is reachable — none of the actual roadmap topics (keys, agent, config, jump hosts, tunnels, hardening) are written up yet.
+Learn stateful filtering, default-deny posture, and the NetFilter framework, then write firewall rules that survive reboots.
+
+Main note:
+
+- [4_Firewalls.md](./4_Firewalls.md)
+
+Concepts:
+
+- [TCP](../concepts/networking/tcp.md)
+- [UDP](../concepts/networking/udp.md)
+
+Commands:
+
+- [`ufw`](../commands/firewall/ufw.md)
+- [`nftables`](../commands/firewall/nftables.md)
+- [`iptables`](../commands/firewall/iptables.md)
+
+---
+
+## 5. SSH And Remote Access
+
+Use SSH properly: keys, agents, config, jump hosts, and tunnels, then harden it for production.
 
 Main note:
 
@@ -114,54 +121,13 @@ Main note:
 
 Concepts:
 
-- [SSH deep dive](../concepts/ssh/ssh_deepdive.md) — TODO
+- [SSH deep dive](../concepts/ssh/ssh_deepdive.md)
 
 Commands:
 
 - [`sshpass`](../commands/ssh/ssh_sshpass.md)
-- [SSH keys, agent, config](../commands/ssh/ssh_keys_agent_config.md) — TODO
-- [`scp`, `rsync`](../commands/ssh/scp_rsync.md) — TODO
-
-Still to do (this is most of Week 18):
-
-- [ ] Generate an ed25519 key, `ssh-copy-id` to a second VM.
-- [ ] `~/.ssh/config` host alias (`prod-web`).
-- [ ] Jump host: `ssh -J` on the command line, then convert to `ProxyJump` in config.
-- [ ] Local port forward (`-L`) — tunnel a remote service to localhost.
-- [ ] `rsync` with `--delete --dry-run`, then for real.
-- [ ] "Bastion + private host" mini-project.
+- [`ssh-keygen`, `ssh-agent`, `~/.ssh/config`](../commands/ssh/ssh_keys_agent_config.md)
+- [`scp`, `rsync`](../commands/ssh/scp_rsync.md)
+- [`nc`](../commands/network-diagnostics/nc.md)
 
 ---
-
-## 19. Firewalls: nftables, ufw, iptables
-
-Stateful filtering, default-deny posture, NetFilter internals.
-
-Main note:
-
-- [4_Firewalls.md](./4_Firewalls.md)
-
-Commands:
-
-- [`ufw`](../commands/firewall/ufw.md)
-- [`nftables`](../commands/firewall/nftables.md) — TODO
-- [`iptables`](../commands/firewall/iptables.md) — TODO
-
-Still to do:
-
-- [ ] `nft list ruleset` — map an existing `ufw` config to its underlying nftables rules.
-- [ ] Write a raw `.nft` ruleset from scratch and load with `nft -f`.
-- [ ] Convert one rule to its `iptables` equivalent.
-- [ ] "Hardened web server firewall" mini-project — SSH from one IP, 80/443 open, SSH rate-limited to 3/min, persisted across reboot.
-
----
-
-## 20. Phase Capstone — Three-Tier Home Lab Network
-
-Not started. Roadmap project: `bastion` / `web` / `db` VMs, dnsmasq-based `.lab` name resolution, nftables on every host, one-command `ProxyJump` access via `~/.ssh/config`. Depends on Weeks 17–19 gaps above being closed first (dnsmasq, SSH hardening, nftables).
-
-Deliverables when you get here:
-
-- [ ] Network diagram.
-- [ ] Each host's firewall config committed to git.
-- [ ] Step-by-step runbook to rebuild the lab from scratch.

@@ -25,6 +25,48 @@ Concept notes are grouped by common Linux learning area.
 |:--------|:------|
 | SSH deep dive (keys, agent, tunnels, bastion) | [ssh_deepdive.md](./ssh/ssh_deepdive.md) — TODO |
 
+## systemd
+
+| Concept | Notes |
+|:--------|:------|
+| systemd units | [units.md](./systemd/units.md) |
+| Targets and runlevels | [targets_runlevels.md](./systemd/targets_runlevels.md) |
+| The boot process | [boot_process.md](./systemd/boot_process.md) |
+
+## Logging
+
+| Concept | Notes |
+|:--------|:------|
+| journald and rsyslog | [journald_rsyslog.md](./logging/journald_rsyslog.md) |
+
+## Storage and Filesystems
+
+| Concept | Notes |
+|:--------|:------|
+| Block devices and partitions | [block_devices_partitions.md](./storage/block_devices_partitions.md) |
+| LVM | [lvm.md](./storage/lvm.md) |
+| Filesystems | [filesystems.md](./storage/filesystems.md) |
+| /etc/fstab | [fstab.md](./storage/fstab.md) |
+| NFS, bind mounts, tmpfs | [nfs_bind_tmpfs.md](./storage/nfs_bind_tmpfs.md) |
+
+## Security and Hardening
+
+| Concept | Notes |
+|:--------|:------|
+| PAM (Pluggable Authentication Modules) | [pam.md](./security/pam.md) |
+| DAC vs MAC (AppArmor & SELinux) | [dac_vs_mac.md](./security/dac_vs_mac.md) |
+| Auditing & intrusion detection | [auditing.md](./security/auditing.md) |
+
+## Performance and Troubleshooting
+
+| Concept | Notes |
+|:--------|:------|
+| USE method & methodology | [use_method.md](./performance/use_method.md) |
+| CPU & memory | [cpu_memory.md](./performance/cpu_memory.md) |
+| Disk I/O | [disk_io.md](./performance/disk_io.md) |
+| Network performance | [network_performance.md](./performance/network_performance.md) |
+| Tracing & profiling (strace, perf, eBPF) | [tracing.md](./performance/tracing.md) |
+
 ## Package Management
 
 | Concept | Notes |
