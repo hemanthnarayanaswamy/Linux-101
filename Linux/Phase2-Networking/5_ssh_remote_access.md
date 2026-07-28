@@ -26,12 +26,6 @@ nc -vz <server-ip> 22
    - The SSH server is the remote system that accepts incoming connections and provides access to its resources.
    - This runs on the remote Linux machine. `sudo systemctl status sshd`
 
-The process begins with the creation of a `key pair`. 
-1. **The public key** is stored on the server, 
-2. while the **private key** remains on the local machine. 
-   - The **private key** must be protected carefully — anyone who obtains it can impersonate you and gain the same access you have. Keeping your private key safe is essential.
-3. When you attempt to SSH into another machine, the SSH protocol checks whether the public key on the server and the private key on your machine match. If they do, access is granted and secure communication begins.
-
 ### What Does SSH do ? 
 
 1. **Secure Communication:** A client and a server can communicate securely thanks to SSH. To prevent unwanted access to the data, it encrypts all information sent over the network, including passwords, usernames, and other private data.
@@ -42,4 +36,13 @@ The process begins with the creation of a `key pair`.
 6. **Port Forwarding** – By mapping a client’s port to the server’s remote ports, SSH helps secure other network protocols, such as TCP/IP.
 
 To Understand the working on how the ssh works refer to [SSH DEEP DIVE](../concepts/ssh/ssh_deepdive.md)
+
+### [SSH Authorized Keys](https://www.howtouselinux.com/post/ssh-authorized_keys-file)
+
+The process begins with the creation of a `key pair`. 
+1. **The public key** is stored on the server, 
+2. while the **private key** remains on the local machine. 
+   - The **private key** must be protected carefully — anyone who obtains it can impersonate you and gain the same access you have. Keeping your private key safe is essential.
+3. When you attempt to SSH into another machine, the SSH protocol checks whether the public key on the server and the private key on your machine match. If they do, access is granted and secure communication begins.
+
 

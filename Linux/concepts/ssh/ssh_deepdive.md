@@ -78,6 +78,7 @@ The receiving machine knows the algorithm used to create the hash and can apply 
 
 ![hash](https://media.geeksforgeeks.org/wp-content/uploads/20260120121858720879/combination_logic_circuits.webp)
 
+---
 ### Components of SSH Keys
 
 The ssh key-pair is generated on the **CLIENT SIDE**, where `private key` stays in clients system, while the public should be shared with the server and be stored on the server.
@@ -141,6 +142,7 @@ The public and private keys are mathematically linked, forming a pair that enabl
 
 9. **Secure access is granted**: Once verified, the server allows the client to log in securely without asking for a password.
 
+---
 ## How To Generate SSH Key with [ssh-keygen](../../commands/ssh/ssh_keys_agent_config.md) in Linux ?
 
 [ssh-keygen](../../commands/ssh/ssh_keys_agent_config.md) is the utility used to generate, manage, and convert authentication keys for SSH. ssh-keygen comes installed with SSH in most of the operating systems.
@@ -172,40 +174,51 @@ ssh-keygen -t dsa
 ssh-keygen -t ecdsa -b 521
 ssh-keygen -t ed25519
 ```
+---
+## Complete SSH Work Flow
 
 ![ssh](https://freedium-mirror.cfd/img/medium/700/1*o1ahfyTI8xQWb8HNL9CQ3g.png)
 
-1. Kicking Things Off: Connection Initialization
-   The SSH journey begins when the client reaches out to the server. This happens over port 22, the default port for SSH. As soon as the connection request hits, the server responds by sending over its SSH protocol version along with a menu of supported cryptographic algorithms. These algorithms cover encryption, MAC (Message Authentication Code), compression, and key exchange — essentially laying out the tools that will keep your session secure.
+1. **Kicking Things Off**: Connection Initialization
+   * The SSH journey begins when the client reaches out to the server. 
+   * This happens over port `22`, the default port for SSH. As soon as the connection request hits, the server responds by sending over its SSH protocol version along with a menu of supported cryptographic algorithms. 
+   * These algorithms cover encryption, MAC (Message Authentication Code), compression, and key exchange — essentially laying out the tools that will keep your session secure.
+   * *Client's Move*: Initiates the TCP connection on port 22.
+   * *Server's Response*: Sends back the protocol version and supported algorithms. 
 
-Client's Move: Initiates the TCP connection on port 22.
-Server's Response: Sends back the protocol version and supported algorithms. 2. Finding Common Ground: Algorithm Negotiation
-Once the server's capabilities are on the table, the client picks its preferred algorithms. This step ensures both sides are on the same page when it comes to encryption methods. Why does this matter? Because it sets the foundation for everything that follows — how your data will be encrypted, authenticated, and protected from prying eyes.
+2. **Finding Common Ground**: Algorithm Negotiation
+   * Once the server's capabilities are on the table, the client picks its preferred algorithms. This step ensures both sides are on the same page when it comes to encryption methods. Why does this matter? Because it sets the foundation for everything that follows — how your data will be encrypted, authenticated, and protected from prying eyes.
+   * *Client's Role*: Chooses its preferred algorithms for encryption, MAC, compression, and key exchange.
+   * *Server's Role*: Confirms the selection, signaling that the negotiation is complete. 
 
-Client's Role: Chooses its preferred algorithms for encryption, MAC, compression, and key exchange.
-Server's Role: Confirms the selection, signaling that the negotiation is complete. 3. Securing the Connection: Key Exchange Phase
-Now that the groundwork is laid, it's time to securely exchange keys. The client and server agree on a method for this, usually opting for a tried-and-true approach like Diffie-Hellman. The client might send its public key or, if needed, request the server's public key. Then, the magic happens: the client generates a session key, encrypts it with the server's public key, and sends it over. The server decrypts it using its private key, and voilà — a secure, symmetric encryption for the session is established.
+3. **Securing the Connection**: Key Exchange Phase
+   * Now that the groundwork is laid, it's time to securely exchange keys. The client and server agree on a method for this, usually opting for a tried-and-true approach like Diffie-Hellman. The client might send its public key or, if needed, request the server's public key. Then, the magic happens: the client generates a session key, encrypts it with the server's public key, and sends it over. The server decrypts it using its private key, and voilà — a secure, symmetric encryption for the session is established.
+   * *Client's Action*: Sends supported key exchange methods, possibly sending or requesting public keys.
+   * *Server's Action*: Agrees on the method, potentially sends its public key.
+   * *Result*: A secure session key is established, ready to protect your data. 
 
-Client's Action: Sends supported key exchange methods, possibly sending or requesting public keys.
-Server's Action: Agrees on the method, potentially sends its public key.
-Result: A secure session key is established, ready to protect your data. 4. Proving Identity: Authentication Phase
-At this point, the client has to prove it's legitimate. SSH offers several ways to authenticate, each with its own level of security.
+4. **Proving Identity**: Authentication Phase
+   * At this point, the client has to prove it's legitimate. SSH offers several ways to authenticate, each with its own level of security.
+   * *Password Authentication*: The client sends an encrypted password, which the server checks. If it matches, access is granted.
+   * *Public Key Authentication*: A more secure method where the client sends its public key. The server responds with a challenge, which the client signs using its private key. The server then verifies this signature.
+   * *Multi-Factor Authentication*: For those who want extra security, SSH can require additional steps like an OTP (One-Time Password) or hardware token.
+   * *Client's Role*: Initiates the authentication process, choosing the method.
+   * *Server's Role*: Verifies the credentials and grants access if they're correct. 
 
-Password Authentication: The client sends an encrypted password, which the server checks. If it matches, access is granted.
-Public Key Authentication: A more secure method where the client sends its public key. The server responds with a challenge, which the client signs using its private key. The server then verifies this signature.
-Multi-Factor Authentication: For those who want extra security, SSH can require additional steps like an OTP (One-Time Password) or hardware token.
-Client's Role: Initiates the authentication process, choosing the method.
-Server's Role: Verifies the credentials and grants access if they're correct. 5. Setting the Stage: Session Setup
-With authentication out of the way, it's time to configure the session. The client can request various options, like setting environment variables or defining the terminal type. It might also ask for SSH agent forwarding, which allows the client to use local SSH keys on the remote server without transferring the keys themselves. If needed, the client can also request port forwarding or X11 forwarding, which are handy for tunneling services through the SSH connection.
+5. **Setting the Stage**: Session Setup
+   * With authentication out of the way, it's time to configure the session. The client can request various options, like setting environment variables or defining the terminal type. 
+   * It might also ask for SSH agent forwarding, which allows the client to use local SSH keys on the remote server without transferring the keys themselves. If needed, the client can also request port forwarding or X11 forwarding, which are handy for tunneling services through the SSH connection.
+   * **Client's Requests**: Specifies session options like terminal type, agent forwarding, or port/X11 forwarding.
+   * **Server's Response**: Acknowledges and sets up the session according to the requests. 
 
-Client's Requests: Specifies session options like terminal type, agent forwarding, or port/X11 forwarding.
-Server's Response: Acknowledges and sets up the session according to the requests. 6. Getting Down to Business: Secure Communication Phase
-Now that the session is fully established and authenticated, it's time to get some work done. Whether you're executing commands, transferring files, or managing server configurations, everything you do from here on is securely encrypted. This phase can involve a wide range of operations, from simple shell commands to complex file transfers using SCP (Secure Copy) or SFTP (SSH File Transfer Protocol).
+6. **Getting Down to Business**: Secure Communication Phase
+   * Now that the session is fully established and authenticated, it's time to get some work done. 
+   * Whether you're executing commands, transferring files, or managing server configurations, everything you do from here on is securely encrypted. This phase can involve a wide range of operations, from simple shell commands to complex file transfers using SCP (Secure Copy) or SFTP (SSH File Transfer Protocol).
+   * **Client's Actions**: Sends encrypted commands and data.
+   * **Server's Actions**: Processes the commands and sends back encrypted responses.
+   * **Ongoing Communication**: The secure exchange continues as long as the session is active. 
 
-Client's Actions: Sends encrypted commands and data.
-Server's Actions: Processes the commands and sends back encrypted responses.
-Ongoing Communication: The secure exchange continues as long as the session is active. 7. Closing Time: Session Termination
+7. **Closing Time**: Session Termination
 All good things must come to an end, and so does your SSH session. When you're done, you can log out, or the session might time out if left idle. The server will then close the connection and clean up any resources that were being used.
-
-Client's Move: Sends a logout command or lets the session time out.
-Server's Move: Closes the connection and frees up resources.
+   * **Client's Move**: Sends a logout command or lets the session time out.
+   * **Server's Move**: Closes the connection and frees up resources.
