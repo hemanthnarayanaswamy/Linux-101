@@ -37,12 +37,37 @@ nc -vz <server-ip> 22
 
 To Understand the working on how the ssh works refer to [SSH DEEP DIVE](../concepts/ssh/ssh_deepdive.md)
 
-### [SSH Authorized Keys](https://www.howtouselinux.com/post/ssh-authorized_keys-file)
+Main SSH Config Files
 
-The process begins with the creation of a `key pair`. 
-1. **The public key** is stored on the server, 
-2. while the **private key** remains on the local machine. 
-   - The **private key** must be protected carefully — anyone who obtains it can impersonate you and gain the same access you have. Keeping your private key safe is essential.
-3. When you attempt to SSH into another machine, the SSH protocol checks whether the public key on the server and the private key on your machine match. If they do, access is granted and secure communication begins.
+| File | Side | Purpose |
+|---|---|---|
+| `~/.ssh/config` | Client | Per-user SSH client config |
+| `/etc/ssh/ssh_config` | Client | System-wide SSH client config |
+| `/etc/ssh/ssh_config.d/*.conf` | Client | Extra client config snippets |
+| `/etc/ssh/sshd_config` | Server | Main SSH server config |
+| `/etc/ssh/sshd_config.d/*.conf` | Server | Extra server config snippets |
+| `~/.ssh/authorized_keys` | Server | Public keys allowed to log in as that user |
+| `~/.ssh/known_hosts` | Client | Server host keys remembered by the client |
+| `/etc/ssh/ssh_known_hosts` | Client | System-wide trusted host keys |
+| `/etc/ssh/ssh_host_*_key` | Server | Server private host keys |
+| `/etc/ssh/ssh_host_*_key.pub` | Server | Server public host keys |
+
+To Understand the details for different keys and ssh files [SSH Keys and SSH config files](../concepts/ssh/ssh_keys_Files.md)
+
+All important SSH Commands. 
+
+| Order | Command | Purpose |
+|---:|---|---|
+| 1 | `ssh` | Connect to remote Linux servers |
+| 2 | `ssh-keygen` | Create/manage SSH keys |
+| 3 | `ssh-copy-id` | Copy your public key to a server |
+| 4 | `ssh-agent` | Hold unlocked private keys in memory |
+| 5 | `ssh-add` | Add/list/remove keys in `ssh-agent` |
+| 6 | `scp` | Copy files over SSH |
+| 7 | `rsync` | Efficient file sync over SSH |
+| 8 | `sshpass` | Password-based automation, usually avoid |
+
+![cheat sheet](https://www.howtouselinux.com/wp-content/uploads/2023/12/SSH-Configuration-Cheat-Sheet-new.png)
+
 
 
